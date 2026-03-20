@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeatherWear</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <div class="hero-topbar">
+          <div>
+            <p class="eyebrow">Daily outfit planner</p>
+            <h1>WeatherWear</h1>
+          </div>
+          <div class="preference-bar" aria-label="Display preferences">
+            <div class="toggle-group" role="group" aria-label="Units">
+              <button
+                type="button"
+                class="toggle-button is-active"
+                data-unit-toggle="metric"
+                aria-pressed="true"
+              >
+                Metric
+              </button>
+              <button
+                type="button"
+                class="toggle-button"
+                data-unit-toggle="imperial"
+                aria-pressed="false"
+              >
+                Imperial
+              </button>
+            </div>
+            <button type="button" id="theme-toggle" class="secondary-button theme-button">
+              Dark mode
+            </button>
+          </div>
+        </div>
+
+        <p class="hero-copy">
+          Pull the upcoming forecast and translate it into practical outfit
+          suggestions for each day, with unit and theme settings that travel
+          with you across sessions.
+        </p>
+
+        <form id="location-form" class="search-panel">
+          <label class="search-label" for="city-input">Choose a city</label>
+          <div class="search-row">
+            <input
+              id="city-input"
+              name="city"
+              type="text"
+              placeholder="Try New York, Tokyo, or Lisbon"
+              autocomplete="off"
+            />
+            <button type="submit" class="primary-button">Get forecast</button>
+          </div>
+          <div class="actions-row">
+            <button type="button" id="geo-button" class="secondary-button">
+              Use my location
+            </button>
+            <p id="status" class="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </section>
+
+      <section class="summary-panel" id="summary-panel" hidden>
+        <div>
+          <p class="summary-label">Forecast for</p>
+          <h2 id="location-name">-</h2>
+        </div>
+        <p id="summary-text" class="summary-text"></p>
+      </section>
+
+      <section class="share-panel">
+        <div>
+          <p class="summary-label">Use it elsewhere</p>
+          <p class="share-copy">
+            Run it on your phone or another device by serving this folder on
+            your local network, or deploy it as a static site.
+          </p>
+        </div>
+        <p class="share-hint">
+          Start with:
+          <code>python3 -m http.server 8000 --bind 0.0.0.0</code>
+        </p>
+      </section>
+
+      <section class="forecast-section">
+        <div id="forecast-grid" class="forecast-grid" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <template id="forecast-card-template">
+      <article class="forecast-card">
+        <div class="card-top">
+          <div>
+            <p class="card-day"></p>
+            <p class="card-date"></p>
+          </div>
+          <p class="card-range"></p>
+        </div>
+        <div class="condition-row">
+          <span class="condition-icon" aria-hidden="true"></span>
+          <div>
+            <p class="condition-label"></p>
+            <p class="condition-detail"></p>
+          </div>
+        </div>
+        <div class="metrics"></div>
+        <div class="recommendation-block">
+          <p class="recommendation-title">What to wear</p>
+          <p class="recommendation-body"></p>
+          <ul class="recommendation-list"></ul>
+        </div>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
